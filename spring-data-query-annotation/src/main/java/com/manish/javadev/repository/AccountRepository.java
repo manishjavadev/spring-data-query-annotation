@@ -3,8 +3,10 @@ package com.manish.javadev.repository;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.manish.javadev.model.AccountEntity;
 
@@ -17,4 +19,7 @@ public interface AccountRepository extends CrudRepository<AccountEntity, Long> {
 
 	@Query(QUERY_BY_STARTDATE_BETWEEN)
 	List<AccountEntity> getByStartDateBetween(Date startDate, Date endDate);
+
+	@Modifying
+	void deleteByAmountIn(List<Double> amounts);
 }

@@ -1,5 +1,6 @@
 package com.manish.javadev;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -43,8 +44,31 @@ public class SpringBootApplicationDemo implements CommandLineRunner {
 		saveAccountData();
 		System.out.println("Find Operation Start After Save");
 		findAccountData();
+		getAllData();
+		deleteAllData();
+		System.out.println("Delete Called");
+		getAllData();
 		System.out.println("Done");
 
+	}
+
+	private void deleteAllData() {
+		List<Double> salaryAmount = new ArrayList<>();
+		salaryAmount.add(new Double(15001));
+		salaryAmount.add(new Double(15002));
+		salaryAmount.add(new Double(15003));
+		salaryAmount.add(new Double(15004));
+		salaryAmount.add(new Double(15005));
+		accountService.deleteByAmountIn(salaryAmount);
+
+	}
+
+	private void getAllData() {
+		System.out.println("Get All data Called");
+		List<AccountEntity> accountEntity = accountService.findAll();
+		for (AccountEntity accEntity : accountEntity) {
+			System.out.println("Account Entity = " + accEntity);
+		}
 	}
 
 	private void findAccountData() {
@@ -70,33 +94,33 @@ public class SpringBootApplicationDemo implements CommandLineRunner {
 		Date startDate = null;
 		// 1
 		startDate = calendar.getTime();
-		AccountEntity accountEntity = new AccountEntity("Saving Account", "Manish", new Double(15000));
+		AccountEntity accountEntity = new AccountEntity("Saving Account", "Manish", new Double(15001));
 		accountEntity.setStartDate(startDate);
 		accountService.createAccount(accountEntity);
 
 		// 2
 		calendar.add(Calendar.MONTH, -1);
 		startDate = calendar.getTime();
-		accountEntity = new AccountEntity("Saving Account", "Neha", new Double(15000));
+		accountEntity = new AccountEntity("Saving Account", "Neha", new Double(15002));
 		accountEntity.setStartDate(startDate);
 		accountService.createAccount(accountEntity);
 
 		// 3
-		accountEntity = new AccountEntity("Saving Account", "Veena", new Double(15000));
+		accountEntity = new AccountEntity("Saving Account", "Veena", new Double(15003));
 		calendar.add(Calendar.MONTH, -2);
 		startDate = calendar.getTime();
 		accountEntity.setStartDate(startDate);
 		accountService.createAccount(accountEntity);
 
 		// 4
-		accountEntity = new AccountEntity("Personal Account", "Munichandra", new Double(15000));
+		accountEntity = new AccountEntity("Personal Account", "Munichandra", new Double(15004));
 		calendar.add(Calendar.MONTH, -3);
 		startDate = calendar.getTime();
 		accountEntity.setStartDate(startDate);
 		accountService.createAccount(accountEntity);
 
 		// 5
-		accountEntity = new AccountEntity("Personal Account", "Veena", new Double(15000));
+		accountEntity = new AccountEntity("Personal Account", "Veena", new Double(15005));
 		calendar.add(Calendar.MONTH, -4);
 		startDate = calendar.getTime();
 		accountEntity.setStartDate(startDate);

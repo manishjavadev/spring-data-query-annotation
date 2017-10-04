@@ -13,5 +13,10 @@ public interface AccountService {
 	AccountEntity createAccount(AccountEntity accountEntity);
 
 	List<AccountEntity> findByAccountType(String string);
+
+	List<AccountEntity> findAll();
+
 	List<AccountEntity> findByStartDateBetween(Date startDate, Date endDate);
+
+	void deleteByAmountIn(List<Double> amounts);
 }

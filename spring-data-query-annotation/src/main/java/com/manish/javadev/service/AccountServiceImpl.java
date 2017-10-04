@@ -41,4 +41,15 @@ public class AccountServiceImpl implements AccountService {
 		return accountRepository.getByStartDateBetween(startDate, endDate);
 	}
 
+	@Override
+	public List<AccountEntity> findAll() {
+		return (List<AccountEntity>) accountRepository.findAll();
+	}
+
+	@Override
+	@Transactional
+	public void deleteByAmountIn(List<Double> amounts) {
+		accountRepository.deleteByAmountIn(amounts);
+	}
+
 }
